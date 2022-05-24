@@ -1,0 +1,44 @@
+{% extends "proje_anket/base.html" %}
+
+{% block title %}Homepage{% endblock %}
+
+{% block main %}
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2">
+        <div class="panel panel-default">
+            <table border="1" cellpadding="10px" cellspacing="5px">
+                
+                    <thead>
+                    <tr>
+                        <th>No</th>
+                        {%for soru in sorular%}
+                        <th>{{soru.soru_metin}}</th>
+                        {%endfor %} 
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {%for cevap in cevaplar%}
+                        <tr>
+                            <td>{{cevap.id}}</td>
+                            <td>{{cevap.sinif}}</td>
+                            <td>{{cevap.ortalama}}</td>
+                            <td>{{cevap.katilim_derecesi}}</td>
+                            <td>{{cevap.hitap_eden}}</td>
+                            <td>{{cevap.hakim_misin}}</td>
+                            <td>{{cevap.dusunur_musun}}</td>
+                            <td>{{cevap.ing_duzey}}</td>
+                        </tr>
+                        {%endfor%}
+                    </tbody>
+                    
+                </table>     
+            </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+
+
+
+{% endblock javascripts %}

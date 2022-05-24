@@ -1,0 +1,45 @@
+{% extends "proje_anket/base.html" %}
+{% load widget_tweaks %}
+{% block title %}Create Poll{% endblock %}
+
+{% block main %}
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Bilgilerinizi Giriniz</h3>
+            </div>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="panel-body">
+
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="option1">Adınız Soyadınız</label>
+                                {%  render_field form.userName class="form-control" %}
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="option2">Okul Numaranız</label>
+                                {% render_field form.userNo class="form-control" %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <hr />
+                        <div class="col-lg-4">
+                            <button type="submit" class="btn btn-info">Anket'e geçiniz.</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+   
+           
+        </div>
+    </div>
+</div>
+{% endblock %}
+

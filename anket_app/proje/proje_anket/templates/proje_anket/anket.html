@@ -1,0 +1,94 @@
+{% extends "proje_anket/base.html" %}
+{% load widget_tweaks %}
+{% block title %}Homepage{% endblock %}
+
+{% block main %}
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title" value='userName'>{{user.userName}} {{user.userNo}}</h3>
+                <input hidden id="user" value="{{user.id}}">
+            </div>
+            
+            <ul class="list-group">
+                {% for soru in sorular %}
+                        <li class="list-group-item">
+                            
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <h2>{{soru.soru_metin}}</h2>
+
+                                    </div>
+                                </div>
+                
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <div class="radio">
+                                                   {%for secenek in soru.secenek_metin%} 
+                                                   <br>
+                                                    <label>
+                                                            
+                                                            <input id="{{forloop.parentloop.counter0}}" value="{{secenek}}" type="radio"  name="secenek{{forloop.parentloop.counter0}}" required onclick=change(this.id,this.value) >
+                                                            {{secenek}}
+                                                    </label> &nbsp;
+                                                    <br />
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </li>
+                        {% endfor %}
+                        <form method="POST">
+                            {% csrf_token %}
+                            {%  render_field form.user_id class="form-control hidden" %}
+                            {%  render_field form.sinif class="form-control hidden" %}
+                            {%  render_field form.ortalama class="form-control hidden" %}
+                            {%  render_field form.katilim_derecesi class="form-control hidden" %}
+                            {%  render_field form.hitap_eden class="form-control hidden" %}
+                            {%  render_field form.hakim_misin class="form-control hidden" %}
+                            {%  render_field form.dusunur_musun class="form-control hidden" %}
+                            {%  render_field form.ing_duzey class="form-control hidden" %}
+                            <button type="submit" class="btn btn-info">
+                                Gönder
+                            </button>
+                        </form>
+                    </ul>
+                    
+            </div>
+    </div>
+</div>
+<script>
+    var list = [];
+    document.getElementById("id_user_id").value = document.getElementById("user").value;
+    function change(i,v){
+        list[i]=v;
+        console.log(v)
+        if(i==0) document.getElementById("id_sinif").value = v;
+        if(i==1) document.getElementById("id_ortalama").value = v;
+        if(i==2) document.getElementById("id_katilim_derecesi").value = v;
+        if(i==3) document.getElementById("id_hitap_eden").value = v;
+        if(i==4) document.getElementById("id_hakim_misin").value = v;
+        if(i==5) document.getElementById("id_dusunur_musun").value = v;
+        if(i==6) document.getElementById("id_ing_duzey").value = v;
+
+    }
+    function func() {
+        console.log(list);
+        
+
+        
+    }
+</script>
+{% endblock %}
+
+{% block javascripts %}
+
+
+
+{% endblock javascripts %}
